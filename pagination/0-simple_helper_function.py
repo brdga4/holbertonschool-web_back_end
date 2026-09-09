@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Pagination """
-def index_range(page, page_size):
+def index_range(page: int, page_size: int) -> tuple:
     """ Pagination """
     start_index = (page - 1) * page_size
     end_index = page * page_size
