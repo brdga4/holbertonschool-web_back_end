@@ -39,9 +39,6 @@ class Server:
         """
         Returns a dictionary with deletion-resilient pagination data.
         """
-        if index is None:
-            index = 0
-
         assert isinstance(index, int)
         assert 0 <= index < len(self.dataset())
 
