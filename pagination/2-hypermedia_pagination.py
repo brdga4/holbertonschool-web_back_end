@@ -55,6 +55,15 @@ class Server:
         return data[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+        """_summary_
+
+        Args:
+            page (int, optional): _description_. Defaults to 1.
+            page_size (int, optional): _description_. Defaults to 10.
+
+        Returns:
+            dict: _description_
+        """
         data = self.get_page(page, page_size)
         pageSize = len(data)
         prev_page = page - 1 if page > 1 else None
