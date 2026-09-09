@@ -4,7 +4,8 @@ Deletion-resilient hypermedia pagination
 """
 
 import csv
-from typing import List, Dict
+import math
+from typing import Dict, List
 
 
 class Server:
@@ -30,31 +31,30 @@ class Server:
         """Dataset indexed by sorting position, starting at 0"""
         if self.__indexed_dataset is None:
             dataset = self.dataset()
+            truncated_dataset = dataset[:1000]
             self.__indexed_dataset = {i: dataset[i] for i in range(len(dataset))}
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
-        Deletion-resilient hypermedia pagination logic.
+        Returns a dictionary with deletion-resilient pagination data.
         """
-        if index is None:
-            index = 0
-
-        indexed_data = self.indexed_dataset()
+        assert type(index) == int and type(page_size) == int
         assert 0 <= index < len(self.dataset())
 
+        indexed_data = self.indexed_dataset()
         data = []
-        current_index = index
+        next_index = index
 
-        while len(data) < page_size and current_index < len(self.dataset()):
-            item = indexed_data.get(current_index)
-            if item is not None:
-                data.append(item)
-            current_index += 1
+        while len(data) < page_size and next_index < len(self.dataset()):
+            if next_index in indexed_data:
+                data.append(indexed_data[next_index])
+
+            next_index += 1
 
         return {
             "index": index,
             "data": data,
-            "page_size": page_size,
-            "next_index": current_index,
+            "page_size": len(data),
+            "next_index": next_index,
         }
