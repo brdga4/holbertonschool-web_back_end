@@ -5,5 +5,13 @@ Shebang for Task 9
 
 
 def insert_school(mongo_collection, **kwargs):
+    """_summary_
+
+    Args:
+        mongo_collection (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     result = mongo_collection.insert_one(kwargs)
     return result.inserted_id
