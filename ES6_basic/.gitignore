@@ -1,5 +1,6 @@
 # Dependency directories
 node_modules/
+.vscode/
 
 # Diagnostic reports and logs
 npm-debug.log*
