@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+.vscode/
+
+# Diagnostic reports and logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional eslint cache
+.eslintcache
